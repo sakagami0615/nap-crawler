@@ -14,7 +14,7 @@ dependencies = [
 ]
 
 [tool.poetry]
-packages = [{include = "nap_crawler", from = "src"}]
+packages = [{include = "nap_crawler", from = "napcrawler"}]
 
 [tool.poetry.group.dev.dependencies]
 pytest-playwright = "^0.7.0"
