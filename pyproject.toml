@@ -1,0 +1,27 @@
+[project]
+name = "nap-crawler"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "sakagami0615",email = "sakagami0615@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "beautifulsoup4 (>=4.13.4,<5.0.0)",
+    "tqdm (>=4.67.1,<5.0.0)",
+    "python-dotenv (>=1.1.1,<2.0.0)"
+]
+
+[tool.poetry]
+packages = [{include = "nap_crawler", from = "src"}]
+
+[tool.poetry.group.dev.dependencies]
+pytest-playwright = "^0.7.0"
+
+[project.scripts]
+napcrawler = "napcrawler.app:main"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
