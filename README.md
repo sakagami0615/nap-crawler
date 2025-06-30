@@ -19,8 +19,21 @@ pip install git+https://github.com/sakagami0615/nap-crawler/nap-crawler.git
 環境変数は「dotenv」を使用して設定しています。そのため、各自で「.env」ファイルを準備してください。設定が必要な環境変数は下記の通りです。
 
 - `NAP_CRAWLER_OUTPUT_CRAWL_FOLDER_PATH`: クローリング結果を保存するフォルダのパス（デフォルト: `.crawl_data`）
+- `NAP_CRAWLER_EXPORT_TYPE`: ページ内テキストを保存するか、HTMLを帆損ずるか（デフォルト: `"HTML"`）
 - `NAP_CRAWLER_SLEEP_TIME_SEC`: 各リクエスト間の待機時間（デフォルト: `1`秒）
 - `NAP_CRAWLER_HEADLESS`: ヘッドレスモードでブラウザを起動するか（デフォルト: `False`）
+
+> .envファイルの内容(例)
+> 
+> ```python
+> NAP_CRAWLER_OUTPUT_CRAWL_FOLDER_PATH = "./.crawl_data"
+> 
+> # Text or HTML
+> NAP_CRAWLER_EXPORT_TYPE = "HTML"
+> 
+> NAP_CRAWLER_SLEEP_TIME_SEC = 1
+> NAP_CRAWLER_HEADLESS = True
+> ```
 
 ### 実行
 
