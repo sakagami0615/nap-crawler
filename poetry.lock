@@ -29,7 +29,7 @@ version = "2025.6.15"
 description = "Python package for providing Mozilla's CA Bundle."
 optional = false
 python-versions = ">=3.7"
-groups = ["dev"]
+groups = ["main", "dev"]
 files = [
     {file = "certifi-2025.6.15-py3-none-any.whl", hash = "sha256:2e0c7ce7cb5d8f8634ca55d2ba7e6ec2689a2fd6537d8dec1296a477a4910057"},
     {file = "certifi-2025.6.15.tar.gz", hash = "sha256:d747aa5a8b9bbbb1bb8c22bb13e22bd1f18e9796defa16bab421f7f7a317323b"},
@@ -41,7 +41,7 @@ version = "3.4.2"
 description = "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet."
 optional = false
 python-versions = ">=3.7"
-groups = ["dev"]
+groups = ["main", "dev"]
 files = [
     {file = "charset_normalizer-3.4.2-cp310-cp310-macosx_10_9_universal2.whl", hash = "sha256:7c48ed483eb946e6c04ccbe02c6b4d1d48e51944b6db70f697e089c193404941"},
     {file = "charset_normalizer-3.4.2-cp310-cp310-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:b2d318c11350e10662026ad0eb71bb51c7812fc8590825304ae0bdd4ac283acd"},
@@ -224,7 +224,7 @@ version = "3.10"
 description = "Internationalized Domain Names in Applications (IDNA)"
 optional = false
 python-versions = ">=3.6"
-groups = ["dev"]
+groups = ["main", "dev"]
 files = [
     {file = "idna-3.10-py3-none-any.whl", hash = "sha256:946d195a0d259cbba61165e88e65941f16e9b36ea6ddb97f00452bae8b1287d3"},
     {file = "idna-3.10.tar.gz", hash = "sha256:12f65c9b470abda6dc35cf8e63cc574b1c52b11df2c86030af0ac09b01b13ea9"},
@@ -426,7 +426,7 @@ version = "2.32.4"
 description = "Python HTTP for Humans."
 optional = false
 python-versions = ">=3.8"
-groups = ["dev"]
+groups = ["main", "dev"]
 files = [
     {file = "requests-2.32.4-py3-none-any.whl", hash = "sha256:27babd3cda2a6d50b30443204ee89830707d396671944c998b5975b031ac2b2c"},
     {file = "requests-2.32.4.tar.gz", hash = "sha256:27d0316682c8a29834d3264820024b62a36942083d52caf2f14c0591336d3422"},
@@ -506,7 +506,7 @@ version = "2.5.0"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
 optional = false
 python-versions = ">=3.9"
-groups = ["dev"]
+groups = ["main", "dev"]
 files = [
     {file = "urllib3-2.5.0-py3-none-any.whl", hash = "sha256:e6b01673c0fa6a13e374b50871808eb3bf7046c4b125b216f6bf1cc604cff0dc"},
     {file = "urllib3-2.5.0.tar.gz", hash = "sha256:3fc47733c7e419d4bc3f6b3dc2b4f890bb743906a30d56ba4a5bfa4bbff92760"},
@@ -521,4 +521,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.13"
-content-hash = "7ae16098affbb5c58be5ebbfdaac0b24dbdb50b17de074aa4ac33a0eaa618b85"
+content-hash = "08d69d9a33fb6d0b6a8d84cf1beaef3cc2122ceefac3d156db90d0cd9dbf2e7f"
