@@ -11,12 +11,6 @@ EXPORT_TYPE = os.environ.get("NAP_CRAWLER_EXPORT_TYPE", "Text")
 SLEEP_TIME_SEC = eval(os.environ.get("NAP_CRAWLER_SLEEP_TIME_SEC", "1"))
 HEADLESS = eval(os.environ.get("NAP_CRAWLER_HEADLESS", "False"))
 
-print(OUTPUT_CRAWL_FOLDER_PATH)
-print(EXPORT_TYPE)
-print(SLEEP_TIME_SEC)
-print(HEADLESS)
-
-exit()
 
 def main():
     nap_crawler = NapCrawler(OUTPUT_CRAWL_FOLDER_PATH, EXPORT_TYPE, SLEEP_TIME_SEC)
