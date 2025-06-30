@@ -1,5 +1,5 @@
 [project]
-name = "nap-crawler"
+name = "napcrawler"
 version = "0.1.0"
 description = ""
 authors = [
