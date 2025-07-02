@@ -7,7 +7,7 @@ Nap Crawlerは、[nap-camp.com](https://www.nap-camp.com)から全キャンプ�
 このプロジェクトはPoetryを使用して管理されています。以下の手順でインストールしてください。
 
 ```bash
-pip install git+https://github.com/sakagami0615/nap-crawler/nap-crawler.git
+pip install git+https://github.com/sakagami0615/nap-crawler.git
 ```
 
 ## 使用方法
