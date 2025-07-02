@@ -1,20 +1,37 @@
+import argparse
 import asyncio
-import os
-from dotenv import load_dotenv
 from napcrawler.crawler import NapCrawler
+from napcrawler.create_logger import change_logger_level
+from napcrawler.setting import LOGGER_NAME, LOGGER
 
 
-load_dotenv()
+def get_argument():
+    def positive_int(value):
+        value = int(value)
+        if value <= 0:
+            raise ArgumentTypeError(f"{value} is an invalid positive int value")
+        return value
 
-OUTPUT_CRAWL_FOLDER_PATH = os.environ.get("NAP_CRAWLER_OUTPUT_CRAWL_FOLDER_PATH", ".crawl_data")
-EXPORT_TYPE = os.environ.get("NAP_CRAWLER_EXPORT_TYPE", "HTML")
-SLEEP_TIME_SEC = eval(os.environ.get("NAP_CRAWLER_SLEEP_TIME_SEC", "1"))
-HEADLESS = eval(os.environ.get("NAP_CRAWLER_HEADLESS", "False"))
+    parser = argparse.ArgumentParser()
+    parser.add_argument("output_folder_path")
+    parser.add_argument("-t", "--output_type", help="HTML or Text", default="HTML",type=str, choices=["HTML", "Text"])
+    parser.add_argument("-w", "--wait_time_sec", default=1, type=positive_int)
+    parser.add_argument("--headless", default=False, type=bool)
+    parser.add_argument("--log_level", default="WARNING", type=str, choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"])
+    args = parser.parse_args()
+
+    change_logger_level(LOGGER_NAME, args.log_level)
+
+    return args
 
 
 def main():
-    nap_crawler = NapCrawler(OUTPUT_CRAWL_FOLDER_PATH, EXPORT_TYPE, SLEEP_TIME_SEC)
-    asyncio.run(nap_crawler.crawl(HEADLESS))
+    args = get_argument()
+
+    LOGGER.info(f"args: {args}")
+
+    nap_crawler = NapCrawler(args.output_folder_path, args.output_type, args.wait_time_sec)
+    asyncio.run(nap_crawler.crawl(args.headless))
 
 
 if __name__ == "__main__":

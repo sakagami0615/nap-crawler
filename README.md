@@ -12,36 +12,28 @@ pip install git+https://github.com/sakagami0615/nap-crawler/nap-crawler.git
 
 ## 使用方法
 
-環境変数を設定し、`napcrawler`コマンドを実行してクローリングを開始します。
+`napcrawler`コマンドを実行してクローリングを開始します。
 
-### 環境変数
-
-環境変数は「dotenv」を使用して設定しています。そのため、各自で「.env」ファイルを準備してください。設定が必要な環境変数は下記の通りです。
-
-- `NAP_CRAWLER_OUTPUT_CRAWL_FOLDER_PATH`: クローリング結果を保存するフォルダのパス（デフォルト: `.crawl_data`）
-- `NAP_CRAWLER_EXPORT_TYPE`: ページ内テキストを保存するか、HTMLを帆損ずるか（デフォルト: `"HTML"`）
-- `NAP_CRAWLER_SLEEP_TIME_SEC`: 各リクエスト間の待機時間（デフォルト: `1`秒）
-- `NAP_CRAWLER_HEADLESS`: ヘッドレスモードでブラウザを起動するか（デフォルト: `False`）
-
-> .envファイルの内容(例)
-> 
-> ```python
-> NAP_CRAWLER_OUTPUT_CRAWL_FOLDER_PATH = "./.crawl_data"
-> 
-> # Text or HTML
-> NAP_CRAWLER_EXPORT_TYPE = "HTML"
-> 
-> NAP_CRAWLER_SLEEP_TIME_SEC = 1
-> NAP_CRAWLER_HEADLESS = True
-> ```
-
-### 実行
+### 実行コマンド
 
 以下のコマンドでクローリングを開始します。
 
 ```bash
-napcrawler
+napcrawler [output_folder_path] -t [output_type] -w [wait_time] --headless [headless] --log_level [log_level]
 ```
+
+### コマンドライン引数
+
+default 列の記載があるコマンドラインは省略可能です。  
+省略した場合は default に記載した値となります。
+
+| name | option | doc | datatype |default |
+| --- | :-: | --- | --- | --- |
+| output_folder_path | - | クローリングしたデータの保存先 | str | - |
+| output_type | -t | クリーリングデータの出力形式(HTML or Text) | str | HTML |
+| wait_time | -w | ページへのリクエスト時の待ち時間(秒) | int (positive) | 1 |
+| headless | --headless | ブラウザのヘッドレスモード | bool | False |
+| log_level | --log_level | ログレベル | str | WARNING |
 
 ## 開発者向けの環境準備
 
@@ -69,15 +61,24 @@ make windows
 make mac
 ```
 
-> 下記コマンドでも実行可能です。
->
-> ```bash
-> # windowsの場合
-> powershell -Command "$$env:PYTHONPATH = './'; poetry run python ./napcrawler/app.py"
+> 上記のコマンドでは make コマンドを使用しています。  
+> windows環境の場合は事前に make コマンドを使用できるようにしておく必要があります。  
+> (ex) chocolatey でインストールする場合
 > 
-> # macの場合
-> PYTHONPATH="./" poetry run python ./napcrawler/app.py
+> ```powershell
+> choco install make
 > ```
+
+また、下記コマンドでも「napcrawler/app.py」を実行することができます。  
+( ${} の変数は各自用意してください )
+
+```bash
+# windowsの場合
+powershell -Command "$$env:PYTHONPATH = './'; poetry run python ./napcrawler/app.py $(OUTPUT_PATH) -t $(OUTPUT_TYPE) -w $(WAIT_TIME_SEC) --headless$HEADLESS) --log_level ${LOG_LEVEL}"
+
+# macの場合
+PYTHONPATH="./" poetry run python ./napcrawler/app.py $(OUTPUT_PATH) -t $(OUTPUT_TYPE) -w $(WAIT_TIME_SEC) --headless $(HEADLESS) --log_level [log_level]
+```
 
 ## ライセンス
 
