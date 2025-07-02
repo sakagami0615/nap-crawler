@@ -7,7 +7,7 @@ Nap Crawlerは、[nap-camp.com](https://www.nap-camp.com)から全キャンプ�
 このプロジェクトはPoetryを使用して管理されています。以下の手順でインストールしてください。
 
 ```bash
-pip install git+https://github.com/sakagami0615/nap-crawler/nap-crawler.git
+pip install git+https://github.com/sakagami0615/nap-crawler.git
 ```
 
 ## 使用方法
@@ -48,7 +48,7 @@ default 列の記載があるコマンドラインは省略可能です。
 2. poetryで必要な依存関係をインストール
 
    ```bash
-   poetry update --with dev
+   poetry update
    ```
 
 環境構築後、以下のコマンドで「napcrawler/app.py」を実行できます。
@@ -70,14 +70,14 @@ make mac
 > ```
 
 また、下記コマンドでも「napcrawler/app.py」を実行することができます。  
-( ${} の変数は各自用意してください )
+※ $()の変数は各自用意してください
 
 ```bash
 # windowsの場合
-powershell -Command "$$env:PYTHONPATH = './'; poetry run python ./napcrawler/app.py $(OUTPUT_PATH) -t $(OUTPUT_TYPE) -w $(WAIT_TIME_SEC) --headless$HEADLESS) --log_level ${LOG_LEVEL}"
+powershell -Command "$$env:PYTHONPATH = './'; poetry run python ./napcrawler/app.py $(OUTPUT_PATH) -t $(OUTPUT_TYPE) -w $(WAIT_TIME_SEC) --headless $(HEADLESS) --log_level $(LOG_LEVEL)"
 
 # macの場合
-PYTHONPATH="./" poetry run python ./napcrawler/app.py $(OUTPUT_PATH) -t $(OUTPUT_TYPE) -w $(WAIT_TIME_SEC) --headless $(HEADLESS) --log_level [log_level]
+PYTHONPATH="./" poetry run python ./napcrawler/app.py $(OUTPUT_PATH) -t $(OUTPUT_TYPE) -w $(WAIT_TIME_SEC) --headless $(HEADLESS) --log_level $(LOG_LEVEL)
 ```
 
 ## ライセンス
