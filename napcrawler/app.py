@@ -9,7 +9,7 @@ def get_argument():
     def positive_int(value):
         value = int(value)
         if value <= 0:
-            raise ArgumentTypeError(f"{value} is an invalid positive int value")
+            raise argparse.ArgumentTypeError(f"{value} is an invalid positive int value")
         return value
 
     parser = argparse.ArgumentParser()

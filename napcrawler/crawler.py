@@ -86,7 +86,7 @@ class NapCrawler:
             location_soups = soup.find_all("a", class_ = "breadcrumbs-item")
 
             name= name_soup.get_text()
-            address= address_soup.get_text()
+            address= address_soup.get_text().replace("地図を表示", "")
             # NOTE: 先頭要素は[キャンプ場検索予約]の文字のためスキップ
             locations= [location_soup.get_text() for location_soup in location_soups[1:]]
 
