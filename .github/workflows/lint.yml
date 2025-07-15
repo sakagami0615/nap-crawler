@@ -1,0 +1,34 @@
+name: Lint with Ruff
+
+on:
+  push:
+    branches:
+      - "**"    # すべてのブランチのpushに対応
+
+jobs:
+  lint:
+    name: Run Ruff Linter
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install Poetry
+        uses: abatilo/actions-poetry@v2
+        with:
+          poetry-version: "2.1.3"
+
+      - name: Install dependencies
+        run: poetry install --no-root
+
+      - name: Run Ruff Lint Check
+        run: poetry run ruff check ./napcrawler
+
+      - name: Check formatting with Ruff
+        run: poetry run ruff format --check .

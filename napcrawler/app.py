@@ -1,8 +1,9 @@
 import argparse
 import asyncio
+
 from napcrawler.crawler import NapCrawler
 from napcrawler.create_logger import change_logger_level
-from napcrawler.setting import LOGGER_NAME, LOGGER
+from napcrawler.setting import LOGGER, LOGGER_NAME, REQUEST_TIMEOUT
 
 
 def get_argument():
@@ -14,10 +15,12 @@ def get_argument():
 
     parser = argparse.ArgumentParser()
     parser.add_argument("output_folder_path")
-    parser.add_argument("-t", "--output_type", help="HTML or Text", default="HTML",type=str, choices=["HTML", "Text"])
+    parser.add_argument("-t", "--output_type", help="HTML or Text", default="HTML", type=str, choices=["HTML", "Text"])
     parser.add_argument("-w", "--wait_time_sec", default=1, type=positive_int)
     parser.add_argument("--headless", default=False, type=bool)
-    parser.add_argument("--log_level", default="WARNING", type=str, choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"])
+    parser.add_argument(
+        "--log_level", default="WARNING", type=str, choices=["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
+    )
     args = parser.parse_args()
 
     change_logger_level(LOGGER_NAME, args.log_level)
@@ -30,7 +33,7 @@ def main():
 
     LOGGER.info(f"args: {args}")
 
-    nap_crawler = NapCrawler(args.output_folder_path, args.output_type, args.wait_time_sec)
+    nap_crawler = NapCrawler(args.output_folder_path, args.output_type, args.wait_time_sec, REQUEST_TIMEOUT)
     asyncio.run(nap_crawler.crawl(args.headless))
 
 

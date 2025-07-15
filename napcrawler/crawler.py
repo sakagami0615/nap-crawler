@@ -1,9 +1,10 @@
 import asyncio
 import json
 import os
+from dataclasses import dataclass
+
 import requests
 from bs4 import BeautifulSoup
-from dataclasses import dataclass
 from playwright.async_api import Page, async_playwright
 from tqdm import tqdm
 
@@ -16,7 +17,6 @@ class NapItem:
 
 
 class NapExporter:
-
     def __init__(self, output_crawl_folder_path: str, output_item_type: str = "Text"):
         self._output_metadata_file_path = os.path.join(output_crawl_folder_path, "metadata.json")
         self._output_item_folder_path = os.path.join(output_crawl_folder_path, "data")
@@ -60,18 +60,25 @@ class NapCrawler:
         "九州・沖縄",
     ]
 
-    def __init__(self, output_crawl_folder_path: str, output_type: str = "Text", wait_time_sec: int = 1):
+    def __init__(
+        self,
+        output_crawl_folder_path: str,
+        output_type: str = "Text",
+        wait_time_sec: int = 1,
+        request_timeout: int = 10,
+    ):
         self._exporter = NapExporter(output_crawl_folder_path, output_type)
         self._wait_time_sec = wait_time_sec
+        self._request_timeout = request_timeout
         self._metadata_store = {}
 
     async def _crawl_camp_site(self, url: str) -> None:
         """キャンプサイト情報を抽出し、ファイル出力"""
-        response = requests.get(url)
-        await asyncio.sleep(self._wait_time_sec)
+        response = requests.get(url, timeout=self._request_timeout)
+        await asyncio.sleep(self._wait_time_sec, timeout=self._request_timeout)
 
         async def get_camp_site_info(response):
-            soup = BeautifulSoup(response.text, 'html.parser')
+            soup = BeautifulSoup(response.text, "html.parser")
 
             page_id = os.path.basename(response.url)
             page_content = response.content
@@ -79,16 +86,16 @@ class NapCrawler:
             return NapItem(page_id, page_content, page_body)
 
         async def get_metadata(response):
-            soup = BeautifulSoup(response.text, 'html.parser')
+            soup = BeautifulSoup(response.text, "html.parser")
 
-            name_soup = soup.find("h1", class_ = "CampsiteDetail_site-name__ON7Zs")
-            address_soup = soup.find("div", class_ = "CampsiteDetail_site-address__5098_")
-            location_soups = soup.find_all("a", class_ = "breadcrumbs-item")
+            name_soup = soup.find("h1", class_="CampsiteDetail_site-name__ON7Zs")
+            address_soup = soup.find("div", class_="CampsiteDetail_site-address__5098_")
+            location_soups = soup.find_all("a", class_="breadcrumbs-item")
 
-            name= name_soup.get_text()
-            address= address_soup.get_text().replace("地図を表示", "")
+            name = name_soup.get_text()
+            address = address_soup.get_text().replace("地図を表示", "")
             # NOTE: 先頭要素は[キャンプ場検索予約]の文字のためスキップ
-            locations= [location_soup.get_text() for location_soup in location_soups[1:]]
+            locations = [location_soup.get_text() for location_soup in location_soups[1:]]
 
             return {
                 "キャンプ場名": name,

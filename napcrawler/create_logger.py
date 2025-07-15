@@ -1,8 +1,7 @@
-from typing import Union
-from logging import getLogger, Logger, StreamHandler, Formatter, WARNING
+from logging import WARNING, Formatter, Logger, StreamHandler, getLogger
 
 
-def create_logger(name: str, level: Union[int, str] = WARNING) -> Logger:
+def create_logger(name: str, level: int | str = WARNING) -> Logger:
     logger = getLogger(name)
     logger.setLevel(level)
 
@@ -13,7 +12,7 @@ def create_logger(name: str, level: Union[int, str] = WARNING) -> Logger:
     return logger
 
 
-def change_logger_level(name: str, level: Union[int, str]):
+def change_logger_level(name: str, level: int | str):
     logger = getLogger(name)
     logger.setLevel(level)
     for handler in logger.handlers:
