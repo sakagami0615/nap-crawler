@@ -31,4 +31,4 @@ jobs:
         run: poetry run ruff check ./napcrawler
 
       - name: Check formatting with Ruff
-        run: poetry run ruff format --check .
+        run: poetry run ruff format --check ./napcrawler
